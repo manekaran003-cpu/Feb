@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Valentine Surprise</title>
+
+    <!-- MOBILE VIEW FIX -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffd6e8;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 6vw; /* responsive */
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            width: 42vw;   /* mobile friendly */
+            max-width: 170px;
+            height: 55px;
+            font-size: 5vw;
+            max-font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background: #2ecc71;
+            color: white;
+        }
+
+        #noBtn {
+            background: #ff4d4d;
+            color: white;
+            position: relative;
+        }
+
+        #message {
+            font-size: 5.5vw;
+            max-font-size: 26px;
+            color: rgb(0, 0, 0);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<h1>One Surprise to You 💖</h1>
+
+<div class="buttons">
+    <button id="noBtn">No ❌</button>
+    <button id="yesBtn" onclick="yesClick()">Yes 💕</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseenter", moveNo);
+
+function moveNo() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function yesClick() {
+    document.body.innerHTML = "<div id='message'></div>";
+
+    const text =
+`7 Feb – 🌹 Rose Day
+ 8 Feb – 💍 Propose Day
+ 9 Feb – 🍫 Chocolate Day
+10 Feb – 🧸 Teddy Day
+11 Feb – 🤝 Promise Day
+12 Feb – 🤗 Hug Day
+13 Feb – 😘 Kiss Day
+14 Feb – ❤️ Valentine’s Day`;
+
+    let i = 0;
+    const speed = 20; // typing speed in milliseconds
+
+    function typeText() {
+        if (i < text.length) {
+            document.getElementById("message").innerHTML +=
+                text[i] === "\n" ? "<br>" : text[i];
+            i++;
+            setTimeout(typeText, speed);
+        }
+    }
+
+    typeText();
+}
+</script>
+
+</body>
+</html>
