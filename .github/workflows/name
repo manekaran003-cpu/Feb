@@ -1,36 +1,116 @@
-# This is a basic workflow to help you get started with Actions
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Valentine Surprise</title>
 
-name: CI
+    <!-- MOBILE VIEW FIX -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffd6e8;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+        h1 {
+            margin-bottom: 25px;
+            font-size: 6vw; /* responsive */
+        }
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+        button {
+            width: 42vw;   /* mobile friendly */
+            max-width: 170px;
+            height: 55px;
+            font-size: 5vw;
+            max-font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+        #yesBtn {
+            background: #2ecc71;
+            color: white;
+        }
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+        #noBtn {
+            background: #ff4d4d;
+            color: white;
+            position: relative;
+        }
+
+        #message {
+            font-size: 5.5vw;
+            max-font-size: 26px;
+            color: rgb(0, 0, 0);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<h1>One Surprise to You 💖</h1>
+
+<div class="buttons">
+    <button id="noBtn">No ❌</button>
+    <button id="yesBtn" onclick="yesClick()">Yes 💕</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseenter", moveNo);
+
+function moveNo() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function yesClick() {
+    document.body.innerHTML = "<div id='message'></div>";
+
+    const text =
+`7 Feb – 🌹 Rose Day
+ 8 Feb – 💍 Propose Day
+ 9 Feb – 🍫 Chocolate Day
+10 Feb – 🧸 Teddy Day
+11 Feb – 🤝 Promise Day
+12 Feb – 🤗 Hug Day
+13 Feb – 😘 Kiss Day
+14 Feb – ❤️ Valentine’s Day`;
+
+    let i = 0;
+    const speed = 20; // typing speed in milliseconds
+
+    function typeText() {
+        if (i < text.length) {
+            document.getElementById("message").innerHTML +=
+                text[i] === "\n" ? "<br>" : text[i];
+            i++;
+            setTimeout(typeText, speed);
+        }
+    }
+
+    typeText();
+}
+</script>
+
+</body>
+</html>
